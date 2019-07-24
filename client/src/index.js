@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import App from './App';
-import reducers from './reducers';
+import rootReducer from './store/reducers/';
 import 'materialize-css/dist/css/materialize.min.css';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const middleware = [thunk];
+const initialState = {};
+
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 ReactDOM.render(
   <Provider store={store}>

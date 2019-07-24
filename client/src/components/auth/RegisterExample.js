@@ -1,13 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setAlert } from '../../store/actions/alert';
-import { registerUser } from '../../store/actions/auth';
-import PropTypes from 'prop-types';
-
 import 'materialize-css/dist/js/materialize';
+import axios from 'axios';
 
-const Register = ({ setAlert, registerUser }) => {
+const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,10 +24,24 @@ const Register = ({ setAlert, registerUser }) => {
     e.preventDefault();
 
     if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
-    } else {
-      registerUser({ name, email, password });
+      return console.log('Passwords do not match');
     }
+    const newUser = {
+      name,
+      email,
+      password
+    };
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const body = JSON.stringify(newUser);
+
+    const res = await axios.post('/api/users', body, config);
+    console.log(res.data);
   };
 
   return (
@@ -47,6 +56,7 @@ const Register = ({ setAlert, registerUser }) => {
             type='text'
             placeholder='Name'
             name='name'
+            required
             value={name}
             onChange={e => onInputChange(e)}
             autoComplete='off'
@@ -57,16 +67,23 @@ const Register = ({ setAlert, registerUser }) => {
             type='email'
             placeholder='Email Address'
             name='email'
+            required
             value={email}
             onChange={e => onInputChange(e)}
             autoComplete='off'
           />
+          <small className='form-text'>
+            This site uses Gravatar so if you want a profile image, use a
+            Gravatar email
+          </small>
         </div>
         <div className='form-group'>
           <input
             type='password'
             placeholder='Password'
             name='password'
+            required
+            minLength='6'
             value={password}
             onChange={e => onInputChange(e)}
             autoComplete='off'
@@ -77,28 +94,20 @@ const Register = ({ setAlert, registerUser }) => {
             type='password'
             placeholder='Confirm Password'
             name='password2'
+            required
+            minLength='6'
             value={password2}
             onChange={e => onInputChange(e)}
             autoComplete='off'
           />
         </div>
-        <button onClick={e => onFormSubmit(e)} className='btn btn-primary'>
-          Submit
-        </button>
+        <input type='submit' className='btn btn-primary' value='Register' />
       </form>
       <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign In</Link>
+        Already have an account? <a href='login.html'>Sign In</a>
       </p>
     </Fragment>
   );
 };
 
-Register.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired
-};
-
-export default connect(
-  null,
-  { setAlert, registerUser }
-)(Register);
+export default Register;
