@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'materialize-css/dist/js/materialize';
 
 const Landing = () => {
@@ -14,15 +15,18 @@ const Landing = () => {
             omnis velit autem, animi beatae!
           </p>
           <div className='buttons'>
-            <a
-              href='#!'
+            <Link
+              to='/register'
               className='btn indigo darken-1 waves-effect waves-light'
             >
               Sign Up
-            </a>
-            <a href='#!' className='btn grey darken-2 waves-effect waves-light'>
+            </Link>
+            <Link
+              to='/login'
+              className='btn grey darken-2 waves-effect waves-light'
+            >
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>

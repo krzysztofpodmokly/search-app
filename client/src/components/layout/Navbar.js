@@ -1,22 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import M from 'materialize-css';
 
 const Navbar = () => {
   return (
     <nav className='nav-wrapper grey darken-2'>
       <div className='container'>
-        <a href='#' className='brand-logo'>
+        <Link to='/' className='brand-logo'>
           Logo
-        </a>
+        </Link>
         <ul className='right hide-on-med-and-down'>
           <li>
-            <a href='#!'>Home</a>
+            <Link to='/'>Home</Link>
           </li>
           <li>
-            <a href='#!'>Register</a>
+            <Link to='/register'>Register</Link>
           </li>
           <li>
-            <a href='#!'>Login</a>
+            <Link to='/login'>Login</Link>
           </li>
         </ul>
       </div>
