@@ -5,9 +5,13 @@ import { logoutUser } from '../../store/actions/auth';
 import { connect } from 'react-redux';
 
 const AuthLinks = ({ logoutUser, initials }) => {
+  console.log(initials);
   return (
     <div>
       <ul className='right hide-on-med-and-down'>
+        <li>
+          <NavLink to='/dashboard'>Dashboard</NavLink>
+        </li>
         <li>
           <NavLink to='/create'>Add Account</NavLink>
         </li>

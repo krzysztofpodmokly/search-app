@@ -36,7 +36,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
@@ -100,7 +100,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => ({

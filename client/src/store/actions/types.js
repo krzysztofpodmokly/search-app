@@ -7,6 +7,8 @@ export const AUTH_FAILURE = 'AUTH_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
+export const GET_PROFILE = 'GET_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
 
 export const ADD_CLASS = 'ADD_CLASS';
 export const REMOVE_CLASS = 'REMOVE_CLASS';
