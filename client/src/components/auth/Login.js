@@ -1,8 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { loginUser } from '../../store/actions/auth';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import 'materialize-css/dist/js/materialize';
 
-const Login = () => {
+const Login = ({ loginUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -20,8 +24,13 @@ const Login = () => {
 
   const onFormSubmit = async e => {
     e.preventDefault();
-    console.log('SUCCESS => ', formData);
+    loginUser(email, password);
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Fragment>
@@ -64,4 +73,16 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);

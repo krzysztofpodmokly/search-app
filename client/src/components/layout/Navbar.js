@@ -1,28 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import AuthLinks from './AuthLinks';
+import GuestLinks from './GuestLinks';
+
 // import M from 'materialize-css';
 
-const Navbar = () => {
+const Navbar = ({ auth: { isAuthenticated, loading, user } }) => {
+  // const userName = isAuthenticated && !loading ? user.name.split(' ') : null;
+  // const [first, last] = userName;
+  // const initials = `${first.charAt(0)}${last.charAt(0)}`;
+  // console.log(userName);
+
+  const links = isAuthenticated ? <AuthLinks /> : <GuestLinks />;
+
   return (
     <nav className='nav-wrapper grey darken-2'>
       <div className='container'>
         <Link to='/' className='brand-logo'>
           Logo
         </Link>
-        <ul className='right hide-on-med-and-down'>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/register'>Register</Link>
-          </li>
-          <li>
-            <Link to='/login'>Login</Link>
-          </li>
-        </ul>
+        {!loading && links}
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state, ownProps) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Navbar);

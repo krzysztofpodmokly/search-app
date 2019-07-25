@@ -8,9 +8,13 @@ import Alert from './components/layout/Alert';
 
 import { setAuthUser } from './store/actions/auth';
 import setAuthToken from './utils/setAuthToken';
-import store from './index';
 
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css';
+
+//REDUX
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -22,19 +26,21 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Fragment>
-        <Navbar />
-        <Route exact path='/' component={Landing} />
-        <section className='container'>
-          <Alert />
-          <Switch>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-          </Switch>
-        </section>
-      </Fragment>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Fragment>
+          <Navbar />
+          <Route exact path='/' component={Landing} />
+          <section className='container'>
+            <Alert />
+            <Switch>
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' component={Login} />
+            </Switch>
+          </section>
+        </Fragment>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

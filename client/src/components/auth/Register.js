@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../store/actions/alert';
 import { registerUser } from '../../store/actions/auth';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import 'materialize-css/dist/js/materialize';
 
-const Register = ({ setAlert, registerUser }) => {
+const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,9 +31,13 @@ const Register = ({ setAlert, registerUser }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      registerUser({ name, email, password });
+      registerUser(name, email, password);
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <Fragment>
@@ -95,10 +99,15 @@ const Register = ({ setAlert, registerUser }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  registerUser: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
+const mapStateToProps = (state, ownProps) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { setAlert, registerUser }
 )(Register);
