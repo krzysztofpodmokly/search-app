@@ -5,6 +5,25 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const User = require('../../models/User');
+const auth = require('../../middleware/auth');
+
+// @route     POST api/users/me
+// @desc      Register user
+// @access    Public - no token needed
+router.get('/me', auth, async (req, res) => {
+  try {
+    const me = await User.findOne({ _id: req.user.id });
+
+    if (!me) {
+      return res.status(400).send({ msg: 'There is no profile for this user' });
+    }
+
+    res.send(me);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route     POST api/users
 // @desc      Register user
@@ -34,6 +53,8 @@ router.post(
     try {
       // check if the user exists
       let user = await User.findOne({ email });
+      const [first, last] = name.split(' ');
+      const initials = `${first.charAt(0)}${last.charAt(0)}`;
 
       if (user) {
         return res
@@ -45,7 +66,8 @@ router.post(
       user = new User({
         name,
         email,
-        password
+        password,
+        initials
       });
 
       // Encrypt password

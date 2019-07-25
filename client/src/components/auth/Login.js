@@ -29,7 +29,7 @@ const Login = ({ loginUser, isAuthenticated }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to='/' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
@@ -75,7 +75,7 @@ const Login = ({ loginUser, isAuthenticated }) => {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => ({
