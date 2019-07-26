@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
+import { connect } from 'react-redux';
+import { getCurrentUser } from '../../store/actions/auth';
 
-const Dashboard = props => {
-  return <div>Dashboard</div>;
+const Dashboard = ({
+  auth: { user },
+  account: { loading, account },
+  getCurrentUser
+}) => {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  return loading && account === null ? (
+    <Spinner />
+  ) : (
+    <div>
+      <h3 className='indigo-text'>Dashboard</h3>
+      <div>
+        <i className='fas fa-user' /> Welcome {user && user.name}
+      </div>
+      <Link to='/create-account' className='btn waves-effect indigo'>
+        Create Account
+      </Link>
+    </div>
+  );
 };
 
-Dashboard.propTypes = {};
+Dashboard.propTypes = {
+  account: PropTypes.object.isRequired,
+  getCurrentUser: PropTypes.func.isRequired
+};
 
-export default Dashboard;
+const mapStateToProps = (state, ownProps) => ({
+  account: state.account,
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { getCurrentUser }
+)(Dashboard);
