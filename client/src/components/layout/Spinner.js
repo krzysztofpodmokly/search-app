@@ -2,8 +2,8 @@ import React from 'react';
 
 const Spinner = () => {
   return (
-    <div class='progress'>
-      <div class='indeterminate' />
+    <div className='progress'>
+      <div className='indeterminate' />
     </div>
   );
 };

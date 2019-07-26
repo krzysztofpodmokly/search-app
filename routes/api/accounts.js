@@ -153,11 +153,11 @@ router.delete('/:accountId', auth, async (req, res) => {
   }
 });
 
-// @route     PUT api/accounts/meta/:accountId
+// @route     PUT api/accounts/meta/
 // @desc      Add account meta
 // @access    Private
 router.put(
-  '/meta/:accountId',
+  '/meta',
   [
     auth,
     [
@@ -181,7 +181,7 @@ router.put(
       return res.status(400).send({ errors: errors.array() });
     }
 
-    const id = req.params.accountId;
+    // const id = req.params.accountId;
     const { content, contentNum, details, tags } = req.body;
 
     const newMeta = {
@@ -191,9 +191,13 @@ router.put(
       tags
     };
 
+    if (tags) {
+      newMeta.tags = skills.split(',').map(skill => skill.trim());
+    }
+
     try {
       // Fetch account to which we want to add META to
-      const account = await Account.findOne({ _id: ObjectId(id) });
+      const account = await Account.findOne({ user: req.user.id });
 
       account.meta.unshift(newMeta);
       await account.save();

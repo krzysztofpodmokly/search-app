@@ -1,7 +1,12 @@
-import { GET_PROFILE, PROFILE_ERROR } from '../actions/types';
+import {
+  GET_ACCOUNT,
+  ACCOUNT_ERROR,
+  CLEAR_PROFILE,
+  UPDATE_ACCOUNT
+} from '../actions/types';
 
 const initState = {
-  profile: null,
+  account: null,
   loading: true,
   error: {}
 };
@@ -10,17 +15,23 @@ export default function(state = initState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_PROFILE:
-      console.log('REDUCER', payload);
+    case GET_ACCOUNT:
+    case UPDATE_ACCOUNT:
       return {
         ...state,
-        profile: payload,
+        account: payload,
         loading: false
       };
-    case PROFILE_ERROR:
+    case ACCOUNT_ERROR:
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        account: null,
         loading: false
       };
     default:

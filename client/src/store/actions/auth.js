@@ -6,8 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-  GET_PROFILE,
-  PROFILE_ERROR
+  GET_ACCOUNT,
+  ACCOUNT_ERROR,
+  CLEAR_PROFILE
 } from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
@@ -81,6 +82,7 @@ export const loginUser = (email, password) => async dispatch => {
 
 // Logout User
 export const logoutUser = () => async dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
 
@@ -88,10 +90,10 @@ export const logoutUser = () => async dispatch => {
 export const getCurrentUser = () => async dispatch => {
   try {
     const res = await axios.get('/api/users/me');
-    dispatch({ type: GET_PROFILE, payload: res.data });
+    dispatch({ type: GET_ACCOUNT, payload: res.data });
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
+      type: ACCOUNT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }

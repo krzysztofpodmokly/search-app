@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../store/actions/auth';
 import { connect } from 'react-redux';
+import { getCurrentUser } from '../../store/actions/auth';
 
-const AuthLinks = ({ logoutUser, initials }) => {
-  console.log(initials);
+const AuthLinks = ({
+  logoutUser,
+  getCurrentUser,
+  account: { account, loading }
+}) => {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  // const initials =
+  //   loading && profile === null ? 'Still loading' : profile.initials;
+  // console.log(initials);
   return (
     <div>
       <ul className='right hide-on-med-and-down'>
@@ -22,7 +33,7 @@ const AuthLinks = ({ logoutUser, initials }) => {
         </li>
         <li>
           <NavLink to='/' className='btn btn-floating indigo'>
-            {initials}
+            JD
           </NavLink>
         </li>
       </ul>
@@ -34,7 +45,11 @@ AuthLinks.propTypes = {
   logoutUser: PropTypes.func.isRequired
 };
 
+const mapStateToProps = (state, ownProps) => ({
+  account: state.account
+});
+
 export default connect(
-  null,
-  { logoutUser }
+  mapStateToProps,
+  { logoutUser, getCurrentUser }
 )(AuthLinks);
