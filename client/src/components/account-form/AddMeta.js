@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-const AddMeta = ({ index, meta, handleChange }) => {
-  const contentText = `content-${index}`;
-  const contentNum = `contentNum-${index}`;
-  const details = `details-${index}`;
-  const tags = `tags-${index}`;
+const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
   return (
     <Fragment>
       <h3 className='indigo-text'>Add Meta - {index + 1}</h3>
@@ -33,6 +29,7 @@ const AddMeta = ({ index, meta, handleChange }) => {
       </div>
       <div className='form-group'>
         <textarea
+          className='materialize-textarea'
           type='text'
           placeholder='Details'
           name='details'
@@ -51,6 +48,9 @@ const AddMeta = ({ index, meta, handleChange }) => {
           autoComplete='off'
         />
       </div>
+      <button onClick={() => handleRemove(index)} className='btn'>
+        Remove Meta Content
+      </button>
     </Fragment>
   );
 };
