@@ -2,10 +2,12 @@ import {
   GET_ACCOUNT,
   ACCOUNT_ERROR,
   CLEAR_PROFILE,
-  UPDATE_ACCOUNT
+  UPDATE_ACCOUNT,
+  GET_ACCOUNTS
 } from '../actions/types';
 
 const initState = {
+  accounts: [],
   account: null,
   loading: true,
   error: {}
@@ -20,6 +22,12 @@ export default function(state = initState, action) {
       return {
         ...state,
         account: payload,
+        loading: false
+      };
+    case GET_ACCOUNTS:
+      return {
+        ...state,
+        accounts: payload,
         loading: false
       };
     case ACCOUNT_ERROR:

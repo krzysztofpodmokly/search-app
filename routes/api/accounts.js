@@ -125,7 +125,8 @@ router.put(
 // @access    Public
 router.get('/', async (req, res) => {
   try {
-    const userQuery = req.query.term.toLowerCase();
+    const userQuery = req.query.query.toLowerCase();
+    console.log(userQuery);
     const accounts = await Account.find({
       title: { $regex: userQuery, $options: 'i' }
     }).sort({ titleNum: 1 }); // sort ascending

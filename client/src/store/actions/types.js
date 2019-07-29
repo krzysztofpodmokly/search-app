@@ -8,6 +8,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
+export const GET_ACCOUNTS = 'GET_ACCOUNTS';
 export const ACCOUNT_ERROR = 'ACCOUNT_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';

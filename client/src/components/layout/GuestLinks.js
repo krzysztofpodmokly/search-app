@@ -7,7 +7,10 @@ const GuestLinks = props => {
     <div>
       <ul className='right hide-on-med-and-down'>
         <li>
-          <NavLink to='/register'>Accounts</NavLink>
+          <NavLink to='/'>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to='/accounts'>All Accounts</NavLink>
         </li>
         <li>
           <NavLink to='/register'>Signup</NavLink>

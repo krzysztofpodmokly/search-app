@@ -21,10 +21,10 @@ const AuthLinks = ({
     <div>
       <ul className='right hide-on-med-and-down'>
         <li>
-          <NavLink to='/dashboard'>Dashboard</NavLink>
+          <NavLink to='/accounts'>All Accounts</NavLink>
         </li>
         <li>
-          <NavLink to='/create-account'>Add Account</NavLink>
+          <NavLink to='/dashboard'>Dashboard</NavLink>
         </li>
         <li>
           <Link to='/' onClick={logoutUser}>
