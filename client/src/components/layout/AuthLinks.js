@@ -24,7 +24,7 @@ const AuthLinks = ({
           <NavLink to='/dashboard'>Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to='/create'>Add Account</NavLink>
+          <NavLink to='/create-account'>Add Account</NavLink>
         </li>
         <li>
           <Link to='/' onClick={logoutUser}>

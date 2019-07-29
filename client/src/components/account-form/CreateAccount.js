@@ -19,14 +19,18 @@ class CreateAccount extends React.Component {
     ]
   };
   render() {
+    const { title, titleNum } = this.state;
+
     const handleChange = (e, index) => {
       const { name, value } = e.target;
+      this.setState({ [name]: value });
+
       let meta = [...this.state.meta];
       meta[index] = { ...meta[index], [name]: value };
       this.setState({ meta });
     };
 
-    const handleAddInput = e => {
+    const handleAddInput = () => {
       this.setState(prevState => ({
         meta: [
           ...prevState.meta,
@@ -35,10 +39,15 @@ class CreateAccount extends React.Component {
       }));
     };
 
+    const handleRemove = index => {
+      let meta = [...this.state.meta];
+      meta.splice(index, 1);
+      this.setState({ meta });
+    };
+
     const onFormSubmit = e => {
       e.preventDefault();
-      console.log(this.state);
-      // createAccount(formData, history);
+      this.props.createAccount(this.state);
     };
 
     const renderList = this.state.meta.map((item, index) => {
@@ -48,6 +57,7 @@ class CreateAccount extends React.Component {
           index={index}
           meta={item}
           handleChange={e => handleChange(e, index)}
+          handleRemove={() => handleRemove(index)}
         />
       );
     });
@@ -61,8 +71,9 @@ class CreateAccount extends React.Component {
               type='text'
               placeholder='Account Title'
               name='title'
-              value=''
+              value={title}
               autoComplete='off'
+              onChange={e => handleChange(e)}
             />
           </div>
           <div className='form-group'>
@@ -70,8 +81,9 @@ class CreateAccount extends React.Component {
               type='text'
               placeholder='Account Number'
               name='titleNum'
-              value=''
+              value={titleNum}
               autoComplete='off'
+              onChange={e => handleChange(e)}
             />
           </div>
           {renderList}

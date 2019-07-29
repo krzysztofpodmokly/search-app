@@ -6,7 +6,7 @@ const Account = require('../../models/Account');
 const ObjectId = require('mongodb').ObjectID;
 
 // @route     POST api/accounts
-// @desc      Create account
+// @desc      Create account with title, title number and unlimited amount of meta                    information stored in an array
 // @access    Private
 router.post(
   '/',
@@ -18,7 +18,23 @@ router.post(
         .isEmpty(),
       check('titleNum', 'Account number is required')
         .not()
-        .isEmpty()
+        .isEmpty(),
+      check('meta', 'Meta information is required')
+        .isArray()
+        .custom(arrayToValidate =>
+          arrayToValidate.every(obj => {
+            if (
+              obj.content === '' &&
+              obj.contentNum === '' &&
+              obj.details === ''
+            ) {
+              return false;
+            } else {
+              return true;
+            }
+          })
+        )
+        .withMessage('Meta information is required')
     ]
   ],
   async (req, res) => {
@@ -27,15 +43,28 @@ router.post(
       return res.status(400).send({ errors: errors.array() });
     }
 
-    const { title, titleNum } = req.body;
+    console.log(errors);
+
+    const { title, titleNum, meta } = req.body;
+
+    const newMeta = meta.map(obj => {
+      let newMetaObj = {};
+      newMetaObj.content = obj.content;
+      newMetaObj.contentNum = obj.contentNum;
+      newMetaObj.details = obj.details;
+      newMetaObj.tags = obj.tags.split(/[ ,]+/); // splitting words from input field
+      return newMetaObj;
+    });
 
     const accountFields = {};
     accountFields.user = req.user.id;
     if (title) accountFields.title = title;
     if (titleNum) accountFields.titleNum = titleNum;
+    if (newMeta.length > 0) accountFields.meta = newMeta;
 
     try {
       let account = new Account(accountFields);
+      console.log(account);
       await account.save();
       res.send(account);
     } catch (err) {
