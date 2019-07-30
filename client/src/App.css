@@ -101,6 +101,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
   color: #3d3d3d !important;
 }
 
+.date-info {
+  padding-left: 30px;
+}
+
 @keyframes fadeInDown {
   0% {
     transform: translateY(1rem);

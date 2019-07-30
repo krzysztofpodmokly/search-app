@@ -126,10 +126,11 @@ router.put(
 router.get('/', async (req, res) => {
   try {
     const userQuery = req.query.query.toLowerCase();
-    console.log(userQuery);
     const accounts = await Account.find({
       title: { $regex: userQuery, $options: 'i' }
-    }).sort({ titleNum: 1 }); // sort ascending
+    })
+      .populate('user', ['name'])
+      .sort({ titleNum: 1 }); // sort ascending
     res.send(accounts);
   } catch (err) {
     console.error(err.message);
@@ -138,13 +139,12 @@ router.get('/', async (req, res) => {
 });
 
 // @route     GET api/accounts/:accountId
-// @desc      Get account based on account id
+// @desc      Get account based on Account Meta Information
 // @access    Public
 router.get('/:accountId', async (req, res) => {
   try {
     const id = req.params.accountId;
-    const account = await Account.findById({ _id: ObjectId(id) });
-
+    const account = await Account.findOne({ 'meta._id': ObjectId(id) });
     if (!account) {
       return res.status(404).send({ msg: 'Account not found' });
     }

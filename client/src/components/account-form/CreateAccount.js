@@ -47,7 +47,7 @@ class CreateAccount extends React.Component {
 
     const onFormSubmit = e => {
       e.preventDefault();
-      this.props.createAccount(this.state);
+      this.props.createAccount(this.state, this.props.history);
     };
 
     const renderList = this.state.meta.map((item, index) => {

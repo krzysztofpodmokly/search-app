@@ -1,15 +1,17 @@
 import {
-  GET_ACCOUNT,
+  GET_USER,
   ACCOUNT_ERROR,
   CLEAR_PROFILE,
   UPDATE_ACCOUNT,
-  GET_ACCOUNTS
+  FETCH_ACCOUNTS,
+  FETCH_ACCOUNT
 } from '../actions/types';
 
 const initState = {
   accounts: [],
   account: null,
   loading: true,
+  loggedUser: null,
   error: {}
 };
 
@@ -17,17 +19,23 @@ export default function(state = initState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_ACCOUNT:
+    case GET_USER:
     case UPDATE_ACCOUNT:
       return {
         ...state,
-        account: payload,
+        loggedUser: payload,
         loading: false
       };
-    case GET_ACCOUNTS:
+    case FETCH_ACCOUNTS:
       return {
         ...state,
         accounts: payload,
+        loading: false
+      };
+    case FETCH_ACCOUNT:
+      return {
+        ...state,
+        account: payload,
         loading: false
       };
     case ACCOUNT_ERROR:

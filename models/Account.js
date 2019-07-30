@@ -21,7 +21,7 @@ const AccountSchema = new Schema({
         required: true
       },
       contentNum: {
-        type: Number,
+        type: String,
         required: true
       },
       details: {
@@ -29,8 +29,7 @@ const AccountSchema = new Schema({
         required: true
       },
       tags: {
-        type: [String],
-        required: true
+        type: [String]
       }
     }
   ],

@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreateAccount from './components/account-form/CreateAccount';
 import ViewAccounts from './components/account-form/ViewAccounts';
+import AccountDetails from './components/account-form/AccountDetails';
 
 import { setAuthUser } from './store/actions/auth';
 import setAuthToken from './utils/setAuthToken';
@@ -44,6 +45,11 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/accounts' component={ViewAccounts} />
+              <Route
+                exact
+                path='/accounts/:accountId'
+                component={AccountDetails}
+              />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute
                 exact
