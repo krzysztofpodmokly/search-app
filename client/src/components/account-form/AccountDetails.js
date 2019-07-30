@@ -20,7 +20,8 @@ const AccountDetails = ({
   //   };
   // }, [accountMetaId]);
 
-  // console.log(meta !== null && !loading && meta);
+  console.log(account)
+  console.log(meta !== null && !loading && meta);
 
   return loading && meta === null ? (
     <Spinner />
@@ -31,7 +32,7 @@ const AccountDetails = ({
       </Link>
       <div className='row'>
         <div className='col s12'>
-          {account !== null && !loading && account && (
+          {account !== null && !loading && meta !== null && (
             <div className='section'>
               <div className='card-panel light-blue darken-3 center'>
                 <h4 className='white-text'>{account.title}</h4>
@@ -56,11 +57,15 @@ AccountDetails.propTypes = {};
 
 const mapStateToProps = (state, ownProps) => {
   const accountId = ownProps.match.params.accountId;
-  const account =
-    state.account.account !== null &&
-    !state.account.loading &&
-    state.account.account.meta;
-  const meta = account ? account.find(item => item._id === accountId) : null;
+  const allMetaItems = state.account.accounts.length > 0 && state.account.accounts.map(account => account.meta);
+  
+  console.log(allMetaItems);
+  const newArr = [];
+  allMetaItems.length > 0 && allMetaItems.forEach(item => {
+    return newArr.push(item.find(i => i._id === accountId))
+  });
+  const meta = newArr.find(item => item !== undefined);
+  
   return {
     account: state.account,
     meta: meta

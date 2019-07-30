@@ -2,13 +2,16 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAccounts } from '../../store/actions/accounts';
+import Spinner from '../layout/Spinner';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const ViewAccounts = ({ location, history, fetchAccounts, accounts }) => {
+const ViewAccounts = ({ location, history, fetchAccounts, accounts: { accounts, loading } }) => {
   const [formData, setFormData] = useState({
     inputValue: ''
   });
+
+  // console.log(loading, accounts)
 
   const getParams = location => {
     const searchParams = new URLSearchParams(location.search);
@@ -104,7 +107,7 @@ const ViewAccounts = ({ location, history, fetchAccounts, accounts }) => {
                 </ul>
               ))
             ) : (
-              <div>No Accounts were found</div>
+              <div>Type to search</div>
             )}
           </div>
         </div>
@@ -116,7 +119,7 @@ const ViewAccounts = ({ location, history, fetchAccounts, accounts }) => {
 ViewAccounts.propTypes = {};
 
 const mapStateToProps = (state, ownProps) => ({
-  accounts: state.account.accounts
+  accounts: state.account
 });
 
 export default connect(
