@@ -11,11 +11,16 @@
 .container {
   max-width: 1100px;
   margin: auto;
+  margin-bottom: 30px;
   overflow: hidden;
   padding: 0 2rem;
   /* margin-top: 6rem;
   margin-bottom: 3rem; */
   transition: all .3s;
+}
+
+.content-box {
+  margin: 20px 0 0 -10px;
 }
 
 /* Overlay */
@@ -85,15 +90,19 @@ input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #ec407a;
+  border-color: #3d3d3d;
   box-shadow: none;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly])+label,
-textarea.materialize-textarea:focus:not([readonly])+label,
-input[type=email]:not(.browser-default):focus:not([readonly])+label,
-input[type=password]:not(.browser-default):focus:not([readonly])+label {
-  color: #ec407a !important;
+input[type=text]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
+  color: #3d3d3d !important;
+}
+
+.date-info {
+  padding-left: 30px;
 }
 
 @keyframes fadeInDown {

@@ -7,10 +7,13 @@ export const AUTH_FAILURE = 'AUTH_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
-export const GET_ACCOUNT = 'GET_ACCOUNT';
+export const GET_USER = 'GET_ACCOUNT';
 export const ACCOUNT_ERROR = 'ACCOUNT_ERROR';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT';
+
+export const FETCH_ACCOUNTS = 'FETCH_ACCOUNTS';
+export const FETCH_ACCOUNT = 'FETCH_ACCOUNT';
 
 export const ADD_CLASS = 'ADD_CLASS';
 export const REMOVE_CLASS = 'REMOVE_CLASS';

@@ -18,11 +18,11 @@ const Dashboard = ({
     <Spinner />
   ) : (
     <div>
-      <h3 className='indigo-text'>Dashboard</h3>
       <div>
-        <i className='fas fa-user' /> Welcome {user && user.name}
+        <h4 className='grey-text text-darken-2'>Welcome {user && user.name}</h4>
       </div>
-      <Link to='/create-account' className='btn waves-effect indigo'>
+      <h3 className='indigo-text'>Dashboard</h3>
+      <Link to='/create-account' className='btn waves-effect'>
         Create Account
       </Link>
     </div>

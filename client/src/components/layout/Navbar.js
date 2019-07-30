@@ -21,12 +21,7 @@ const Navbar = ({ auth: { isAuthenticated, loading } }) => {
 
   return (
     <nav className='nav-wrapper grey darken-2'>
-      <div className='container'>
-        <Link to='/' className='brand-logo'>
-          Logo
-        </Link>
-        {!loading && links}
-      </div>
+      <div className='container'>{!loading && links}</div>
     </nav>
   );
 };

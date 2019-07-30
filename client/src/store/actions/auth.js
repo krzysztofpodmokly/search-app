@@ -6,7 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
-  GET_ACCOUNT,
+  GET_USER,
   ACCOUNT_ERROR,
   CLEAR_PROFILE
 } from './types';
@@ -66,7 +66,6 @@ export const loginUser = (email, password) => async dispatch => {
 
   try {
     const res = await axios.post('/api/auth', body, config);
-    console.log('LOGIN => ', res.data);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     dispatch(setAuthUser());
   } catch (err) {
@@ -90,7 +89,7 @@ export const logoutUser = () => async dispatch => {
 export const getCurrentUser = () => async dispatch => {
   try {
     const res = await axios.get('/api/users/me');
-    dispatch({ type: GET_ACCOUNT, payload: res.data });
+    dispatch({ type: GET_USER, payload: res.data });
   } catch (err) {
     dispatch({
       type: ACCOUNT_ERROR,

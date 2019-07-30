@@ -1,9 +1,15 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_ACCOUNT, ACCOUNT_ERROR, UPDATE_ACCOUNT } from '../actions/types';
+import {
+  GET_USER,
+  GET_ACCOUNTS,
+  ACCOUNT_ERROR,
+  FETCH_ACCOUNTS,
+  FETCH_ACCOUNT
+} from '../actions/types';
 
 // Create or update account
-export const createAccount = formData => async dispatch => {
+export const createAccount = (formData, history) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -16,11 +22,11 @@ export const createAccount = formData => async dispatch => {
     const res = await axios.post('/api/accounts', body, config);
 
     dispatch({
-      type: GET_ACCOUNT,
+      type: GET_USER,
       payload: res.data
     });
     dispatch(setAlert('Account added', 'success'));
-    // history.push('/dashboard');
+    history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -35,28 +41,37 @@ export const createAccount = formData => async dispatch => {
   }
 };
 
-// Add Meta Content
-export const addMeta = (formData, history) => async dispatch => {
+// Fetch accounts based on input
+export const fetchAccounts = term => async dispatch => {
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
-    const body = JSON.stringify(formData);
-
-    const res = await axios.put('/api/accounts/meta', body, config);
-
-    dispatch({ type: UPDATE_ACCOUNT, payload: res.data });
-    dispatch(setAlert('Meta content added!', 'success'));
+    const res = await axios.get(`/api/accounts?query=${term}`);
+    dispatch({ type: FETCH_ACCOUNTS, payload: res.data });
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach(error => {
+        dispatch(setAlert(error.msg, 'danger'));
+      });
     }
+    dispatch({
+      type: ACCOUNT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
+export const fetchAccountDetails = accountId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/accounts/${accountId}`);
+    dispatch({ type: FETCH_ACCOUNT, payload: res.data });
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => {
+        dispatch(setAlert(error.msg, 'danger'));
+      });
+    }
     dispatch({
       type: ACCOUNT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

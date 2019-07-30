@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 const GuestLinks = props => {
   return (
     <div>
-      <ul className='right hide-on-med-and-down'>
+      <ul className='right'>
         <li>
-          <NavLink to='/register'>Accounts</NavLink>
+          <NavLink to='/'>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to='/accounts'>All Accounts</NavLink>
         </li>
         <li>
           <NavLink to='/register'>Signup</NavLink>

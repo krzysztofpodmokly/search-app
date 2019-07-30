@@ -8,7 +8,8 @@ import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreateAccount from './components/account-form/CreateAccount';
-import AddMeta from './components/account-form/AddMeta';
+import ViewAccounts from './components/account-form/ViewAccounts';
+import AccountDetails from './components/account-form/AccountDetails';
 
 import { setAuthUser } from './store/actions/auth';
 import setAuthToken from './utils/setAuthToken';
@@ -29,6 +30,9 @@ const App = () => {
     store.dispatch(setAuthUser());
   }, []);
 
+  // const params = getParams();
+  // console.log(params);
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -40,13 +44,18 @@ const App = () => {
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
+              <Route exact path='/accounts' component={ViewAccounts} />
+              <Route
+                exact
+                path='/accounts/:accountId'
+                component={AccountDetails}
+              />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute
                 exact
                 path='/create-account'
                 component={CreateAccount}
               />
-              {/* <PrivateRoute exact path='/add-meta' component={AddMeta} /> */}
             </Switch>
           </section>
         </Fragment>

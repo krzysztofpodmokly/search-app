@@ -6,7 +6,16 @@ import { Link, withRouter } from 'react-router-dom';
 const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
   return (
     <Fragment>
-      <h3 className='indigo-text'>Add Meta - {index + 1}</h3>
+      <div className='row valign-wrapper'>
+        <div className='col s3'>
+          <h5 className='indigo-text text-lighten-1'>Add Meta - {index + 1}</h5>
+        </div>
+        <div className='col s9'>
+          <button onClick={() => handleRemove(index)} className='btn red'>
+            Remove Meta Content
+          </button>
+        </div>
+      </div>
       <div className='form-group'>
         <input
           type='text'
@@ -48,9 +57,6 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
           autoComplete='off'
         />
       </div>
-      <button onClick={() => handleRemove(index)} className='btn'>
-        Remove Meta Content
-      </button>
     </Fragment>
   );
 };

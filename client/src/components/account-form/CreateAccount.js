@@ -47,7 +47,7 @@ class CreateAccount extends React.Component {
 
     const onFormSubmit = e => {
       e.preventDefault();
-      this.props.createAccount(this.state);
+      this.props.createAccount(this.state, this.props.history);
     };
 
     const renderList = this.state.meta.map((item, index) => {
@@ -87,14 +87,29 @@ class CreateAccount extends React.Component {
             />
           </div>
           {renderList}
-          <button onClick={e => handleAddInput(e)} className='btn waves-effect'>
-            Add Meta Content
-          </button>
-          <button onClick={e => onFormSubmit(e)} className='btn'>
-            Submit
-          </button>
         </form>
-        {/* <AddMeta /> */}
+        <div className='content-box'>
+          <div className='row'>
+            <div className='col s6'>
+              <button
+                onClick={e => handleAddInput(e)}
+                className='btn waves-effect'
+              >
+                Add Meta Content
+              </button>
+            </div>
+          </div>
+          <div className='row'>
+            <div className='col s6'>
+              <button
+                onClick={e => onFormSubmit(e)}
+                className='btn btn-large indigo'
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }
