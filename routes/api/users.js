@@ -7,9 +7,9 @@ const config = require('config');
 const User = require('../../models/User');
 const auth = require('../../middleware/auth');
 
-// @route     POST api/users/me
-// @desc      Register user
-// @access    Public - no token needed
+// @route     GET api/users/me
+// @desc      Get current users profile
+// @access    Private
 router.get('/me', auth, async (req, res) => {
   try {
     const me = await User.findOne({ _id: req.user.id });
@@ -17,7 +17,7 @@ router.get('/me', auth, async (req, res) => {
     if (!me) {
       return res.status(400).send({ msg: 'There is no profile for this user' });
     }
-
+    console.log(me);
     res.send(me);
   } catch (err) {
     console.error(err.message);

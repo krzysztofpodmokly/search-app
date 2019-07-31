@@ -4,19 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AuthLinks from './AuthLinks';
 import GuestLinks from './GuestLinks';
-// import { getCurrentUser } from '../../store/actions/auth';
-
-// import M from 'materialize-css';
 
 const Navbar = ({ auth: { isAuthenticated, loading } }) => {
-  // useEffect(() => {
-  //   getCurrentUser();
-  // }, [getCurrentUser]);
-
-  // const initials =
-  //   !profile.loading && profile.profile !== null && profile.profile.initials;
-  // console.log(initials);
-
   const links = isAuthenticated ? <AuthLinks /> : <GuestLinks />;
 
   return (

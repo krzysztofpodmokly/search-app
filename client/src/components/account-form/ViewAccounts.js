@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   fetchAccounts,
   fetchAccountDetails,
@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 const ViewAccounts = ({
   location,
   history,
+  isAuthenticated,
   accounts: { accounts, loading },
   fetchAccounts,
   deleteAccount
@@ -20,6 +21,11 @@ const ViewAccounts = ({
   const [formData, setFormData] = useState({
     inputValue: ''
   });
+
+  // Protecting the route if the user is not authenticated
+  if (!isAuthenticated) {
+    return <Redirect to='/login' />;
+  }
 
   const getParams = location => {
     const searchParams = new URLSearchParams(location.search);
@@ -132,7 +138,8 @@ const ViewAccounts = ({
 ViewAccounts.propTypes = {};
 
 const mapStateToProps = (state, ownProps) => ({
-  accounts: state.account
+  accounts: state.account,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(

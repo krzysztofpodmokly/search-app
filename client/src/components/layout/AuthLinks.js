@@ -8,7 +8,7 @@ import { getCurrentUser } from '../../store/actions/auth';
 const AuthLinks = ({
   logoutUser,
   getCurrentUser,
-  account: { account, loading },
+  account: { loggedUser, loading },
   initials
 }) => {
   useEffect(() => {
@@ -31,7 +31,7 @@ const AuthLinks = ({
         </li>
         <li>
           <NavLink to='/' className='btn btn-floating indigo'>
-            {initials && initials !== null && initials}
+            {!loading && loggedUser && loggedUser.initials}
           </NavLink>
         </li>
       </ul>
@@ -45,8 +45,7 @@ AuthLinks.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    account: state.account,
-    initials: state.auth.user.initials
+    account: state.account
   };
 };
 
