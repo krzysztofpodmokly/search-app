@@ -21,7 +21,7 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
           type='text'
           placeholder='Content Text'
           name='content'
-          value={meta.content || ''}
+          value={meta.content}
           onChange={e => handleChange(e, index)}
           autoComplete='off'
         />
@@ -31,7 +31,7 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
           type='text'
           placeholder='Content Number'
           name='contentNum'
-          value={meta.contentNum || ''}
+          value={meta.contentNum}
           onChange={e => handleChange(e, index)}
           autoComplete='off'
         />
@@ -42,7 +42,7 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
           type='text'
           placeholder='Details'
           name='details'
-          value={meta.details || ''}
+          value={meta.details}
           onChange={e => handleChange(e, index)}
           autoComplete='off'
         />
@@ -52,7 +52,7 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
           type='text'
           placeholder='Tags'
           name='tags'
-          value={meta.tags || ''}
+          value={meta.tags}
           onChange={e => handleChange(e, index)}
           autoComplete='off'
         />

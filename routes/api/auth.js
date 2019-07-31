@@ -42,7 +42,7 @@ router.post(
 
     try {
       // check if the user exists
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email: email });
 
       if (!user) {
         return res
@@ -63,7 +63,7 @@ router.post(
       // Payload is a decoded data which will be stored in a token
       const payload = {
         user: {
-          id: user._id
+          id: user.id
         }
       };
 

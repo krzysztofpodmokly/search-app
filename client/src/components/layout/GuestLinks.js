@@ -10,9 +10,6 @@ const GuestLinks = props => {
           <NavLink to='/'>Home</NavLink>
         </li>
         <li>
-          <NavLink to='/accounts'>All Accounts</NavLink>
-        </li>
-        <li>
           <NavLink to='/register'>Signup</NavLink>
         </li>
         <li>

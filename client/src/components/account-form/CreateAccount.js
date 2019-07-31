@@ -51,8 +51,6 @@ const CreateAccount = ({ createAccount, history }) => {
   const onFormSubmit = e => {
     e.preventDefault();
     createAccount(formData, history);
-
-    console.log('submitted');
   };
 
   const renderList = meta.map((item, index) => {
