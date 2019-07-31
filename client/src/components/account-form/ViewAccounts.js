@@ -1,17 +1,23 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchAccounts } from '../../store/actions/accounts';
+import {
+  fetchAccounts,
+  fetchAccountDetails
+} from '../../store/actions/accounts';
 import Spinner from '../layout/Spinner';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
-const ViewAccounts = ({ location, history, fetchAccounts, accounts: { accounts, loading } }) => {
+const ViewAccounts = ({
+  location,
+  history,
+  fetchAccounts,
+  accounts: { accounts, loading }
+}) => {
   const [formData, setFormData] = useState({
     inputValue: ''
   });
-
-  // console.log(loading, accounts)
 
   const getParams = location => {
     const searchParams = new URLSearchParams(location.search);
@@ -47,7 +53,9 @@ const ViewAccounts = ({ location, history, fetchAccounts, accounts: { accounts, 
     fetchAccounts(query);
   };
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <h4 className='indigo-text'>Type to search</h4>
       <form className='form' onSubmit={e => onFormSubmit(e)}>
@@ -92,6 +100,7 @@ const ViewAccounts = ({ location, history, fetchAccounts, accounts: { accounts, 
                     <li key={metaItem._id} className='collection-item'>
                       <Link
                         to={`/accounts/${metaItem._id}`}
+                        onClick={() => fetchAccountDetails(metaItem._id)}
                         className='grey-text text-darken-2'
                       >
                         {metaItem.content}
@@ -124,5 +133,5 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
   mapStateToProps,
-  { fetchAccounts }
+  { fetchAccounts, fetchAccountDetails }
 )(ViewAccounts);

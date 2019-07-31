@@ -8,15 +8,13 @@ import { getCurrentUser } from '../../store/actions/auth';
 const AuthLinks = ({
   logoutUser,
   getCurrentUser,
-  account: { account, loading }
+  account: { account, loading },
+  initials
 }) => {
   useEffect(() => {
     getCurrentUser();
   }, []);
 
-  // const initials =
-  //   loading && profile === null ? 'Still loading' : profile.initials;
-  // console.log(initials);
   return (
     <div>
       <ul>
@@ -33,7 +31,7 @@ const AuthLinks = ({
         </li>
         <li>
           <NavLink to='/' className='btn btn-floating indigo'>
-            JD
+            {initials && initials !== null && initials}
           </NavLink>
         </li>
       </ul>
@@ -45,9 +43,12 @@ AuthLinks.propTypes = {
   logoutUser: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  account: state.account
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    account: state.account,
+    initials: state.auth.user.initials
+  };
+};
 
 export default connect(
   mapStateToProps,

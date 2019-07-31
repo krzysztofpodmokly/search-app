@@ -9,7 +9,11 @@ import {
 } from '../actions/types';
 
 // Create or update account
-export const createAccount = (formData, history) => async dispatch => {
+export const createOrUpdateAccount = (
+  formData,
+  history,
+  edit = false
+) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -20,13 +24,16 @@ export const createAccount = (formData, history) => async dispatch => {
     const body = JSON.stringify(formData);
 
     const res = await axios.post('/api/accounts', body, config);
-
     dispatch({
       type: GET_USER,
       payload: res.data
     });
-    dispatch(setAlert('Account added', 'success'));
-    history.push('/dashboard');
+    dispatch(setAlert(edit ? 'Account Updated' : 'Account Created', 'success'));
+
+    // if account was created => redirect
+    if (!edit) {
+      history.push('/dashboard');
+    }
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -66,6 +73,7 @@ export const fetchAccountDetails = accountId => async dispatch => {
     const res = await axios.get(`/api/accounts/${accountId}`);
     dispatch({ type: FETCH_ACCOUNT, payload: res.data });
   } catch (err) {
+    console.error(err);
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => {
