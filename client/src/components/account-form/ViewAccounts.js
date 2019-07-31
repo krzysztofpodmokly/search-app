@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   fetchAccounts,
-  fetchAccountDetails
+  fetchAccountDetails,
+  deleteAccount
 } from '../../store/actions/accounts';
 import Spinner from '../layout/Spinner';
 import Moment from 'react-moment';
@@ -12,8 +13,9 @@ import PropTypes from 'prop-types';
 const ViewAccounts = ({
   location,
   history,
+  accounts: { accounts, loading },
   fetchAccounts,
-  accounts: { accounts, loading }
+  deleteAccount
 }) => {
   const [formData, setFormData] = useState({
     inputValue: ''
@@ -88,11 +90,13 @@ const ViewAccounts = ({
                       <div className='col s8'>
                         <h4>{account.title}</h4>
                       </div>
-                      <div className='col s2'>
-                        <button className='btn'>Edit</button>
-                      </div>
-                      <div className='col s2'>
-                        <button className='btn red'>Delete</button>
+                      <div className='col s4'>
+                        <button
+                          onClick={() => deleteAccount(account._id)}
+                          className='btn red'
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </li>
@@ -133,5 +137,5 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
   mapStateToProps,
-  { fetchAccounts, fetchAccountDetails }
+  { fetchAccounts, fetchAccountDetails, deleteAccount }
 )(ViewAccounts);

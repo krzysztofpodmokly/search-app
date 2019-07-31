@@ -2,10 +2,10 @@ import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createOrUpdateAccount } from '../../store/actions/accounts';
+import { createAccount } from '../../store/actions/accounts';
 import AddMeta from './AddMeta';
 
-const CreateAccount = ({ createOrUpdateAccount, history }) => {
+const CreateAccount = ({ createAccount, history }) => {
   const [formData, setFormData] = useState({
     title: '',
     titleNum: '',
@@ -50,7 +50,7 @@ const CreateAccount = ({ createOrUpdateAccount, history }) => {
 
   const onFormSubmit = e => {
     e.preventDefault();
-    createOrUpdateAccount(formData, history);
+    createAccount(formData, history);
 
     console.log('submitted');
   };
@@ -129,5 +129,5 @@ CreateAccount.propTypes = {
 
 export default connect(
   null,
-  { createOrUpdateAccount }
+  { createAccount }
 )(withRouter(CreateAccount));

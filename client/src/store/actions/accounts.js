@@ -5,15 +5,12 @@ import {
   GET_ACCOUNTS,
   ACCOUNT_ERROR,
   FETCH_ACCOUNTS,
-  FETCH_ACCOUNT
+  FETCH_ACCOUNT,
+  DELETE_ACCOUNT
 } from '../actions/types';
 
-// Create or update account
-export const createOrUpdateAccount = (
-  formData,
-  history,
-  edit = false
-) => async dispatch => {
+// Create account
+export const createAccount = (formData, history) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -28,12 +25,9 @@ export const createOrUpdateAccount = (
       type: GET_USER,
       payload: res.data
     });
-    dispatch(setAlert(edit ? 'Account Updated' : 'Account Created', 'success'));
+    dispatch(setAlert('Account Created', 'success'));
 
-    // if account was created => redirect
-    if (!edit) {
-      history.push('/dashboard');
-    }
+    history.push('/dashboard');
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -73,13 +67,24 @@ export const fetchAccountDetails = accountId => async dispatch => {
     const res = await axios.get(`/api/accounts/${accountId}`);
     dispatch({ type: FETCH_ACCOUNT, payload: res.data });
   } catch (err) {
-    console.error(err);
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => {
         dispatch(setAlert(error.msg, 'danger'));
       });
     }
+    dispatch({
+      type: ACCOUNT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const deleteAccount = id => async dispatch => {
+  try {
+    await axios.delete(`/api/accounts/${id}`);
+    dispatch({ type: DELETE_ACCOUNT, payload: id });
+  } catch (err) {
     dispatch({
       type: ACCOUNT_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

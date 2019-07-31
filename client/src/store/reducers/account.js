@@ -4,7 +4,8 @@ import {
   CLEAR_PROFILE,
   UPDATE_ACCOUNT,
   FETCH_ACCOUNTS,
-  FETCH_ACCOUNT
+  FETCH_ACCOUNT,
+  DELETE_ACCOUNT
 } from '../actions/types';
 
 const initState = {
@@ -20,7 +21,6 @@ export default function(state = initState, action) {
 
   switch (type) {
     case GET_USER:
-    case UPDATE_ACCOUNT:
       return {
         ...state,
         loggedUser: payload,
@@ -36,6 +36,12 @@ export default function(state = initState, action) {
       return {
         ...state,
         account: payload,
+        loading: false
+      };
+    case DELETE_ACCOUNT:
+      return {
+        ...state,
+        accounts: state.accounts.filter(account => account._id !== payload),
         loading: false
       };
     case ACCOUNT_ERROR:
