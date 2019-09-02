@@ -1,9 +1,4 @@
-import {
-  SET_ALERT,
-  REMOVE_ALERT,
-  ADD_CLASS,
-  REMOVE_CLASS
-} from '../actions/types';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 const initState = {
   allAlerts: [],
   addClass: null,

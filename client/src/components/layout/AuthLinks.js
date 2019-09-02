@@ -13,7 +13,7 @@ const AuthLinks = ({
 }) => {
   useEffect(() => {
     getCurrentUser();
-  }, []);
+  }, [getCurrentUser]);
 
   return (
     <div>

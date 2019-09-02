@@ -7,6 +7,18 @@
   --success-color: #28a745;
 }
 
+h3 {
+  margin: 50px 0;
+}
+
+.main-header {
+  margin-left: 10px;
+}
+
+.go-back {
+  margin: 30px 0 0 10px;
+}
+
 /* Utilities */
 .container {
   max-width: 1100px;
@@ -14,8 +26,6 @@
   margin-bottom: 30px;
   overflow: hidden;
   padding: 0 2rem;
-  /* margin-top: 6rem;
-  margin-bottom: 3rem; */
   transition: all .3s;
 }
 
@@ -86,23 +96,33 @@
   animation: moveDown 1s;
 }
 
+input:not([type]):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #3d3d3d;
-  box-shadow: none;
-}
-
-input[type=text]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]) {
-  color: #3d3d3d !important;
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #3f51b5 !important;
+  box-shadow: 0 1px 0 0 #3f51b5 !important;
 }
 
 .date-info {
   padding-left: 30px;
+}
+
+.collection-item {
+  transition: all .3s ease-out;
+}
+
+.collection-item:hover {
+  background: #F3F3F3 !important;
 }
 
 @keyframes fadeInDown {
@@ -124,5 +144,47 @@ input[type=password]:not(.browser-default):focus:not([readonly]) {
 
   100% {
     transform: translateY(1rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0;
+  }
+
+  nav ul a {
+    padding: 0 10px !important;
+  }
+
+  .btn-floating {
+    display: none !important;
+  }
+
+  h4 {
+    font-size: 15px;
+  }
+
+  .collection.with-header .collection-item {
+    padding-left: 20px;
+  }
+
+  .row.valign-wrapper {
+    margin-bottom: 0;
+  }
+
+  .row .col.s2 {
+    margin-right: 40px;
+  }
+
+  .collection .collection-item {
+    padding: 10px !important;
+  }
+
+  .date-info {
+    padding-left: 10px;
+  }
+
+  .collection__meta-header {
+    font-size: 22px;
   }
 }

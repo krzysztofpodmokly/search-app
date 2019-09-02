@@ -12,7 +12,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentUser();
-  }, []);
+  }, [getCurrentUser]);
 
   return loading && account === null ? (
     <Spinner />
@@ -22,7 +22,7 @@ const Dashboard = ({
         <h4 className='grey-text text-darken-2'>Welcome {user && user.name}</h4>
       </div>
       <h3 className='indigo-text'>Dashboard</h3>
-      <Link to='/create-account' className='btn waves-effect'>
+      <Link to='/create-account' className='btn btn-large waves-effect'>
         Create Account
       </Link>
     </div>

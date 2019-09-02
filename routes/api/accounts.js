@@ -43,8 +43,6 @@ router.post(
       return res.status(400).send({ errors: errors.array() });
     }
 
-    console.log(errors);
-
     const { title, titleNum, meta } = req.body;
 
     const newMeta = meta.map(obj => {
@@ -64,7 +62,6 @@ router.post(
 
     try {
       let account = new Account(accountFields);
-      console.log(account);
       await account.save();
       res.send(account);
     } catch (err) {
