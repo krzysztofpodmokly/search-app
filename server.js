@@ -8,8 +8,6 @@ connectDB();
 // bodyParser
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API running'));
-
 // Define routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
