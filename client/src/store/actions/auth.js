@@ -22,7 +22,6 @@ export const setAuthUser = () => async dispatch => {
 
   try {
     const res = await axios.get('/api/auth');
-    console.log('setAuthUser => ', res.data);
     dispatch({ type: AUTH_SUCCESS, payload: res.data });
   } catch (err) {
     dispatch({ type: AUTH_FAILURE });
@@ -67,7 +66,6 @@ export const loginUser = (email, password) => async dispatch => {
 
   try {
     const res = await axios.post('/api/auth', body, config);
-    console.log('LOGIN => ', res.data);
     dispatch({ type: LOGIN_SUCCESS, payload: res.data });
     dispatch(setAuthUser());
   } catch (err) {

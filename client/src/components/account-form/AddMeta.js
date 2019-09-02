@@ -1,7 +1,6 @@
-import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
   return (
@@ -60,7 +59,5 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
     </Fragment>
   );
 };
-
-AddMeta.propTypes = {};
 
 export default connect(null)(withRouter(AddMeta));

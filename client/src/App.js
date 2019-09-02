@@ -30,9 +30,6 @@ const App = () => {
     store.dispatch(setAuthUser());
   }, []);
 
-  // const params = getParams();
-  // console.log(params);
-
   return (
     <Provider store={store}>
       <BrowserRouter>

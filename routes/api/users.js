@@ -17,7 +17,6 @@ router.get('/me', auth, async (req, res) => {
     if (!me) {
       return res.status(400).send({ msg: 'There is no profile for this user' });
     }
-    console.log(me);
     res.send(me);
   } catch (err) {
     console.error(err.message);

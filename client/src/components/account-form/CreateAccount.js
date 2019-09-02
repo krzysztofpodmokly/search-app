@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createAccount } from '../../store/actions/accounts';
 import AddMeta from './AddMeta';
@@ -116,14 +115,6 @@ const CreateAccount = ({ createAccount, history }) => {
     </Fragment>
   );
 };
-
-CreateAccount.propTypes = {
-  // createAccount: PropTypes.func.isRequired
-};
-
-// const mapStateToProps = (state, ownProps) => ({
-
-// })
 
 export default connect(
   null,

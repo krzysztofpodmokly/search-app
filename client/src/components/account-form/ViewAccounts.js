@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import {
@@ -8,7 +8,6 @@ import {
 } from '../../store/actions/accounts';
 import Spinner from '../layout/Spinner';
 import Moment from 'react-moment';
-import PropTypes from 'prop-types';
 
 const ViewAccounts = ({
   location,
@@ -61,11 +60,9 @@ const ViewAccounts = ({
     fetchAccounts(query);
   };
 
-  return loading ? (
-    <Spinner />
-  ) : (
+  let form = (
     <Fragment>
-      <h4 className='indigo-text'>Type to search</h4>
+      <h4 className='main-header indigo-text'>Type to search</h4>
       <form className='form' onSubmit={e => onFormSubmit(e)}>
         <div className='row'>
           <div className='col s9'>
@@ -93,10 +90,12 @@ const ViewAccounts = ({
                 <ul key={account._id} className='collection with-header'>
                   <li className='collection-header'>
                     <div className='row valign-wrapper'>
-                      <div className='col s8'>
-                        <h4>{account.title}</h4>
+                      <div className='col s10'>
+                        <h4 className='collection__meta-header'>
+                          {account.title}
+                        </h4>
                       </div>
-                      <div className='col s4'>
+                      <div className='col s2'>
                         <button
                           onClick={() => deleteAccount(account._id)}
                           className='btn red'
@@ -126,16 +125,19 @@ const ViewAccounts = ({
                 </ul>
               ))
             ) : (
-              <div>Type to search</div>
+              <div>
+                Type some letters, once submitted result matching title will be
+                displayed
+              </div>
             )}
           </div>
         </div>
       </form>
     </Fragment>
   );
-};
 
-ViewAccounts.propTypes = {};
+  return loading ? <Spinner /> : form;
+};
 
 const mapStateToProps = (state, ownProps) => ({
   accounts: state.account,

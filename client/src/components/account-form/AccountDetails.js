@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAccountDetails } from '../../store/actions/accounts';
 import Spinner from '../../components/layout/Spinner';
-import PropTypes from 'prop-types';
 
 const AccountDetails = ({
   match,
@@ -15,14 +14,14 @@ const AccountDetails = ({
 
   useEffect(() => {
     fetchAccountDetails(accountMetaId);
-  }, [fetchAccountDetails]);
+  }, [fetchAccountDetails, accountMetaId]);
 
   return loading && meta === undefined ? (
     <Spinner />
   ) : (
     <div className='container'>
-      <Link to='/accounts'>
-        <div>Go Back</div>
+      <Link to='/accounts' className='btn-go-back'>
+        <div className='go-back btn indigo'>Go Back</div>
       </Link>
       <div className='row'>
         <div className='col s12'>
@@ -42,15 +41,12 @@ const AccountDetails = ({
   );
 };
 
-AccountDetails.propTypes = {};
-
 const mapStateToProps = (state, ownProps) => {
   const accountId = ownProps.match.params.accountId;
   const allMetaItems =
     state.account.accounts.length > 0 &&
     state.account.accounts.map(account => account.meta);
 
-  // console.log(allMetaItems);
   const newArr = [];
   allMetaItems.length > 0 &&
     allMetaItems.forEach(item => {

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_USER,
-  GET_ACCOUNTS,
   ACCOUNT_ERROR,
   FETCH_ACCOUNTS,
   FETCH_ACCOUNT,
