@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://kristoff:lGzr8nU8CfuieWGn@cluster0-2gce6.mongodb.net/kontohjelpData?retryWrites=true&w=majority",
+  "jwtSecret": "ptakilatajakluczem"
+}
