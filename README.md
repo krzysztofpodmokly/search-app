@@ -15,6 +15,14 @@ This application was developed in order to practice server side authentication a
 ## Launch
 
 Application is running on heroku.com.
+
+To login use following credentials
+
+```bash
+email: test@test.com
+password: test1234
+```
+
 Checkout deployed version [here](https://salty-stream-30130.herokuapp.com)
 
 ## Scope of functionalities
