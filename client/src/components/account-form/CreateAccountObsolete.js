@@ -1,6 +1,5 @@
-import React, { useState, Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createOrUpdateAccount } from '../../store/actions/accounts';
 import AddMeta from './AddMeta';
@@ -114,14 +113,6 @@ class CreateAccount extends React.Component {
     );
   }
 }
-
-CreateAccount.propTypes = {
-  // createAccount: PropTypes.func.isRequired
-};
-
-// const mapStateToProps = (state, ownProps) => ({
-
-// })
 
 export default connect(
   null,

@@ -7,12 +7,12 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
     <Fragment>
       <div className='row valign-wrapper'>
         <div className='col s3'>
-          <h5 className='indigo-text text-lighten-1'>Add Meta - {index + 1}</h5>
+          <h5 className='indigo-text text-lighten-1'>Add Meta</h5>
         </div>
         <div className='col s9'>
-          <button onClick={() => handleRemove(index)} className='btn red'>
+          {/* <button onClick={() => handleRemove(index)} className='btn red'>
             Remove Meta Content
-          </button>
+          </button> */}
         </div>
       </div>
       <div className='form-group'>
@@ -27,7 +27,7 @@ const AddMeta = ({ index, meta, handleChange, handleRemove }) => {
       </div>
       <div className='form-group'>
         <input
-          type='text'
+          type='number'
           placeholder='Content Number'
           name='contentNum'
           value={meta.contentNum}

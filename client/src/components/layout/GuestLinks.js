@@ -6,9 +6,6 @@ const GuestLinks = props => {
     <div>
       <ul className='right'>
         <li>
-          <NavLink to='/'>Home</NavLink>
-        </li>
-        <li>
           <NavLink to='/register'>Signup</NavLink>
         </li>
         <li>
