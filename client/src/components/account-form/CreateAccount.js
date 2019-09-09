@@ -32,14 +32,14 @@ const CreateAccount = ({ createAccount, history }) => {
     setFormData({ ...formData, meta: metaContent });
   };
 
-  const handleAddInput = () => {
-    setFormData(prevState => ({
-      meta: [
-        ...prevState.meta,
-        { content: '', contentNum: '', details: '', tags: '' }
-      ]
-    }));
-  };
+  // const handleAddInput = () => {
+  //   setFormData(prevState => ({
+  //     meta: [
+  //       ...prevState.meta,
+  //       { content: '', contentNum: '', details: '', tags: '' }
+  //     ]
+  //   }));
+  // };
 
   const handleRemove = index => {
     let metaContent = [...meta];
@@ -80,7 +80,7 @@ const CreateAccount = ({ createAccount, history }) => {
         </div>
         <div className='form-group'>
           <input
-            type='text'
+            type='number'
             placeholder='Account Number'
             name='titleNum'
             value={titleNum}
@@ -91,7 +91,7 @@ const CreateAccount = ({ createAccount, history }) => {
         {renderList}
       </form>
       <div className='content-box'>
-        <div className='row'>
+        {/* <div className='row'>
           <div className='col s6'>
             <button
               onClick={e => handleAddInput(e)}
@@ -100,7 +100,7 @@ const CreateAccount = ({ createAccount, history }) => {
               Add Meta Content
             </button>
           </div>
-        </div>
+        </div> */}
         <div className='row'>
           <div className='col s6'>
             <button
